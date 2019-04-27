@@ -1,3 +1,7 @@
+"""
+the author of the original algorithm RRT is AtsushiSakai,
+the original RRT : https://github.com/AtsushiSakai/PythonRobotics/tree/master/PathPlanning/RRT
+"""
 import matplotlib.pyplot as plt
 import math
 import copy
