@@ -27,13 +27,13 @@ class CONNECT_RRT:
         self.nodelistB = [self.goal]              # TREE_B用于从终点向起点方向扩展
         while True:
             rnd = self.get_random(self.iteration) # Get a random point to extend
-            if self.iteration % 2 == 0:           # 迭代次数为偶数（从0开始）领TREE_A进行扩展，TREE_B进行连接，奇数相反
+            if self.iteration % 2 == 0:           # 迭代次数为偶数（从0开始）TREE_A进行扩展，TREE_B进行连接，奇数相反
                 new_node = self.Extend(self.nodelistA, rnd)
             else:
                 new_node = self.Extend(self.nodelistB, rnd)
 
             #  start to Connect  #
-            if self.iteration % 2 == 0:    # 迭代次数为偶数（从0开始）领TREE_A进行扩展，TREE_B进行连接，奇数相反
+            if self.iteration % 2 == 0:    
                 last_point = self.Extend(self.nodelistB, [new_node.x, new_node.y])
             else:
                 last_point = self.Extend(self.nodelistA, [new_node.x, new_node.y])
@@ -133,11 +133,8 @@ class Node:
 def main(gx=18.0, gy=18.0):
     obstaclelist = [
         #(5, 5, 1),(3, 6, 2),(3, 8, 2),(3, 10, 2),(7, 5, 2),(9, 5, 2),
-        (5,1,1.2),(5,3,1),(5,5,1),(5,7,1),(5,9,1),(5,11,1),(5,13,1),(5,15,1),(5,17,1),(5,19,1),
-        (5,11,1),(5,12,1),(5,13,1),(5,16,3),(11,1,1),(11,3,1),(11,5,1),(11,7,1),(11,9,1),(11,11,1),(11,13,1),(11,15,1),(11,17,1),(13,4,1),
-(8,14,0.5),(11,-1,1.2),(11,-2,1.2),(5,4,1),(5,6,1),(5,8,1),(5,10,1),(5,12,1),(5,14,1),(5,16,1),(5,18,1),(5,20,1),
-        (5,12,1),(5,14,1),(5,19,1),(5,16,3),(11,2,1),(11,4,1),(11,6,1),(11,8,1),(11,10,1),(11,12,1),(11,14,1),(11,16,1),(11,18,1),(13,20,1),
-(8,14,0.5),(11,-1,1.2),(11,-2,1.2),(5,20,1),(11,0,1)]                                       # 这一行是后加的,用于生成障碍物节点信息
+        (5,1,1.2),(5,3,1),(5,5,1),(5,7,1),(5,9,1),(5,11,1),(5,13,1),(5,15,1),(5,17,1),(5,19,1)] #obstacle
+        
     start = [0.0, 0.0]
     rrt = CONNECT_RRT(start, goal=[gx, gy], obstaclelist=obstaclelist, randaera = [-2, 20])
     path = rrt.planning(animation=show_animation)
